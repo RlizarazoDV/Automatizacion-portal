@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-09-01T22:03:59 COT" name="All Test Suite" finished-at="2024-09-01T22:05:02 COT" duration-ms="63051">
+    <groups>
+    </groups>
+    <test started-at="2024-09-01T22:03:59 COT" name="Portal Famisanar WEB - Login" finished-at="2024-09-01T22:03:59 COT" duration-ms="9">
+    </test> <!-- Portal Famisanar WEB - Login -->
+    <test started-at="2024-09-01T22:03:59 COT" name="Portal Famisanar WEB - Menu Administrador" finished-at="2024-09-01T22:05:02 COT" duration-ms="62980">
+      <class name="menuAdministradorTest.usuarioTest.usuarioTest">
+        <test-method is-config="true" signature="setUp(java.lang.String,java.lang.String)[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:03:59 COT" name="setUp" finished-at="2024-09-01T22:03:59 COT" duration-ms="10" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[menuUsuarios]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:03:59 COT" name="setUp" finished-at="2024-09-01T22:04:24 COT" duration-ms="25223" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method is-config="true" signature="InicioSesion()[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:04:24 COT" name="InicioSesion" finished-at="2024-09-01T22:04:28 COT" duration-ms="4406" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- InicioSesion -->
+        <test-method signature="administrarPerfiles()[pri:4, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:04:28 COT" name="administrarPerfiles" finished-at="2024-09-01T22:05:01 COT" duration-ms="32962" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- administrarPerfiles -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:05:01 COT" name="tearDown" finished-at="2024-09-01T22:05:02 COT" duration-ms="351" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- menuAdministradorTest.usuarioTest.usuarioTest -->
+    </test> <!-- Portal Famisanar WEB - Menu Administrador -->
+    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu IPS" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
+    </test> <!-- Portal Famisanar WEB - Menu IPS -->
+    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Empleador" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
+    </test> <!-- Portal Famisanar WEB - Menu Empleador -->
+    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Afiliado POS" finished-at="2024-09-01T22:05:02 COT" duration-ms="1">
+    </test> <!-- Portal Famisanar WEB - Menu Afiliado POS -->
+    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Contratante PAC" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
+    </test> <!-- Portal Famisanar WEB - Menu Contratante PAC -->
+    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Fuerza Comercial" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
+    </test> <!-- Portal Famisanar WEB - Menu Fuerza Comercial -->
+    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Refrencia y contraReferencia" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
+      <class name="menuAdministradorTest.usuarioTest.usuarioTest">
+        <test-method is-config="true" signature="setUpSuite()[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:03:59 COT" name="setUpSuite" finished-at="2024-09-01T22:03:59 COT" duration-ms="11" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpSuite -->
+      </class> <!-- menuAdministradorTest.usuarioTest.usuarioTest -->
+    </test> <!-- Portal Famisanar WEB - Menu Refrencia y contraReferencia -->
+  </suite> <!-- All Test Suite -->
+</testng-results>

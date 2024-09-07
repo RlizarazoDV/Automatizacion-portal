@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" thread-count="1" data-provider-thread-count="1" parallel="methods" >
+    <test name="Portal Famisanar WEB - Login">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx" />
+        <parameter name="nombreHoja" value="Login" />
+        <classes>
+            <!--class name="loginTest.loginTest"/-->
+        </classes>
+    </test>
+    <test name="Portal Famisanar WEB - Menu Administrador">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx" />
+        <parameter name="nombreHoja" value="menuUsuarios" />
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+
+        <classes>
+            <class name="menuAdministradorTest.usuarioTest.usuarioTest"/>
+              <!--class name="menuAdministradorTest.informe_UsuarioTest.informeTest"/-->
+            <!--class name = "menuAdministradorTest.aplicacionesTest.aplicacionesTest"/-->
+        </classes>
+    </test>
+    <test name="Portal Famisanar WEB - Menu IPS">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx" />
+        <parameter name="nombreHoja" value="menuAutorizaciones" />
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.ingresoIPSTest.ingresoIPSTest"/-->
+            <!--class name = "IPSTest.autorizacionesTest.autorizacionesTest"/-->
+            <!--class name = "com.famisanar.b_ips.c_menuCarteraTest"/-->
+            <!--class name = "com.famisanar.b_ips.d_SubmenuBasesDeDatos"/-->
+            <!--class name="com.famisanar.b_ips.h_SubmenuServiciosAlCliente"/-->
+        </classes>
+    </test>
+    <test name="Portal Famisanar WEB - Menu Empleador">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx"/>
+        <parameter name="nombreHoja" value="menusEmpleador"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <class name="menuEmpleadorTest.movilidadASubsidiadoTest.descargarFormularioTest"/>
+            <class name="menuEmpleadorTest.datosEmpleadorTest.ActualizarInformacionEmpleadorTest"/>
+            <!--class name="com.famisanar.c_empleador.d_opcionAportesyCarteraTest"/-->
+            <!--class name = "com.famisanar.c_empleador.e_licenciaEIncapacidadesTest"/-->
+            <!--class name = "com.famisanar.c_empleador.g_servicioAlClienteTest"/-->
+        </classes>
+    </test>
+    <test name="Portal Famisanar WEB - Menu Afiliado POS">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="seleniumURL" value=""/>
+        <classes>
+            <!--class name = "com.famisanar.d_afiliadoPOS.b_actualizacionDatosContactoTest"/-->
+            <!--class name="com.famisanar.d_afiliadoPOS.f_aportesYCarteraTest"/-->
+            <!--class name="com.famisanar.d_afiliadoPOS.g_saludTest"/-->
+            <!--class name="com.famisanar.d_afiliadoPOS.h_certificacionesTest"/-->
+            <!--class name="com.famisanar.d_afiliadoPOS.i_servicioAlClienteTest"/-->
+            <!--class name="com.famisanar.d_afiliadoPOS.j_citasMedicasPosTest"/-->
+        </classes>
+    </test>
+
+    <test name="Portal Famisanar WEB - Menu Contratante PAC">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/contratantePAC/datosMenuContratantePAC.xlsx" />
+        <parameter name="nombreHoja" value="contratantePac" />
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+
+
+        <classes>
+            <class name="menuContratantePacTest.actualizarDatosContactoTest.actualizardatosContacto"/>
+            <class name="menuContratantePacTest.afiliacionesTest.afiliadoTest"/>
+            <class name="menuContratantePacTest.facturasYPagosTest.facturasYPagosTest"/>
+            <class name="menuContratantePacTest.certificacionesTest.certificacionesTest"/>
+
+        </classes>
+    </test>
+    <test name="Portal Famisanar WEB - Menu Fuerza Comercial">
+        <parameter name="browser" value="firefox"/>
+        <parameter name="seleniumURL" value=""/>
+        <classes>
+            <!--class name="com.famisanar.f_fuerzaComercial.fuerzaComercialTest"/-->
+        </classes>
+    </test>
+    <test name="Portal Famisanar WEB - Menu Refrencia y contraReferencia">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="seleniumURL" value=""/>
+        <classes>
+            <!--class name="com.famisanar.h_referenciayContrareferencia.a_referenciayContrareferenciaTest"/-->
+        </classes>
+    </test>
+</suite>
