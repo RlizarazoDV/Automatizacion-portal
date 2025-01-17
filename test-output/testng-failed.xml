@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite thread-count="1" parallel="methods" data-provider-thread-count="1" name="Failed suite [All Test Suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="1" parallel="methods" name="Portal Famisanar WEB - Menu IPS(failed)">
-    <parameter name="nombreHoja" value="menuAutorizaciones"/>
-    <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+  <test thread-count="1" parallel="methods" name="Usuario(failed)">
+    <parameter name="nombreHoja" value="menuUsuarios"/>
+    <parameter name="rutaArchivo" value="src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx"/>
     <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
     <parameter name="browser" value="chrome"/>
     <classes>
-      <class name="IPSTest.autorizacionesTest.autorizacionesTest">
+      <class name="menuAdministradorTest.usuarioTest.usuarioTest">
         <methods>
-          <include name="tearDown"/>
-          <include name="login"/>
           <include name="setUpSuite"/>
+          <include name="tearDown"/>
+          <include name="InicioSesion"/>
           <include name="setUp"/>
           <include name="setUp"/>
-          <include name="Urgenciasodontologicas"/>
+          <include name="administrarDatosContactabilidad"/>
         </methods>
-      </class> <!-- IPSTest.autorizacionesTest.autorizacionesTest -->
+      </class> <!-- menuAdministradorTest.usuarioTest.usuarioTest -->
     </classes>
-  </test> <!-- Portal Famisanar WEB - Menu IPS(failed) -->
+  </test> <!-- Usuario(failed) -->
 </suite> <!-- Failed suite [All Test Suite] -->

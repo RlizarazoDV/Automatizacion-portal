@@ -8,7 +8,9 @@ import Configuracion.basePage;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class administrar_Usuario extends basePage {
@@ -23,7 +25,7 @@ public class administrar_Usuario extends basePage {
     private final By tipoIdentificacion = By.xpath("//*[contains(text(),'Usuario')]//following::select[1]");
     private final By identificacion =  By.xpath("//*[contains(text(),'Usuario')]//following::select//following::input[1]");
     private final By botonAceptar = By.xpath("//*[contains(@src, '/Portal/imgs/btnAceptar.gif')]");
-    private final By linkSeleccionarUsuario = By.xpath("//span[@class='iceOutTxt' and contains(@id, 'userTypeId')]");
+    private final By linkSeleccionarUsuario = By.xpath("//span[contains(@class,'iceOutTxt')and contains(@id,'userTypeId')]");
     private final By botonModificar = By.xpath("//input[contains(@class,'iceCmdBtn') and contains(@src,'/Portal/imgs/btnModificar.gif')]");
     private final By botonRecordarContraseña = By.id("j_id112:rememberPassword");
     private final By botonCambiarEstado = By.id("j_id112:lock");
@@ -145,6 +147,10 @@ public class administrar_Usuario extends basePage {
 
 
 
+
+
+
+
     //Metodo para modificar el correo del usuario
     public void modificarUsuario(String segundoN)
     {
@@ -177,4 +183,10 @@ public class administrar_Usuario extends basePage {
 
          return confirmaAsigFil;
      }
+
+
+
+
+
+
 }

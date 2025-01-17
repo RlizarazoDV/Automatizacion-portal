@@ -50,12 +50,12 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-All_Test_Suite" class="navigator-link ">
-                    <span>C:\FamisanarCode\automatizacion-pruebas\portal Famisanar\testportal.xml</span>
+                    <span>C:\Users\User\Documents\automatizacion\portal Famisanar\testportal.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
                   <a href="#" panel-name="testlist-All_Test_Suite" class="navigator-link ">
-                    <span class="test-stats">8 tests</span>
+                    <span class="test-stats">28 tests</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -103,7 +103,7 @@
                     <div class="method-list-content passed suite-All_Test_Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-All_Test_Suite" title="menuAdministradorTest.usuarioTest.usuarioTest" class="method navigator-link" hash-for-method="administrarPerfiles">administrarPerfiles</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-All_Test_Suite" title="menuAdministradorTest.usuarioTest.usuarioTest" class="method navigator-link" hash-for-method="administrarDatosContactabilidad">administrarDatosContactabilidad</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-All_Test_Suite -->
@@ -126,9 +126,9 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="administrarPerfiles">
-                  </a> <!-- administrarPerfiles -->
-                  <span class="method-name">administrarPerfiles</span>
+                  <a name="administrarDatosContactabilidad">
+                  </a> <!-- administrarDatosContactabilidad -->
+                  <span class="method-name">administrarDatosContactabilidad</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -136,19 +136,14 @@
         </div> <!-- panel All_Test_Suite -->
         <div panel-name="test-xml-All_Test_Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\FamisanarCode\automatizacion-pruebas\portal Famisanar\testportal.xml</span>
+            <span class="header-content">C:\Users\User\Documents\automatizacion\portal Famisanar\testportal.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite thread-count=&quot;1&quot; parallel=&quot;methods&quot; data-provider-thread-count=&quot;1&quot; name=&quot;All Test Suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
-  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Portal Famisanar WEB - Login&quot;&gt;
-    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;Login&quot;/&gt;
-    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx&quot;/&gt;
-    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
-  &lt;/test&gt; &lt;!-- Portal Famisanar WEB - Login --&gt;
-  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Portal Famisanar WEB - Menu Administrador&quot;&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Usuario&quot;&gt;
     &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuUsuarios&quot;/&gt;
     &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx&quot;/&gt;
     &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
@@ -156,21 +151,151 @@
     &lt;classes&gt;
       &lt;class name=&quot;menuAdministradorTest.usuarioTest.usuarioTest&quot;/&gt;
     &lt;/classes&gt;
-  &lt;/test&gt; &lt;!-- Portal Famisanar WEB - Menu Administrador --&gt;
-  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Portal Famisanar WEB - Menu IPS&quot;&gt;
+  &lt;/test&gt; &lt;!-- Usuario --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Informe Usuario&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuInformes&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Informe Usuario --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Aplicaciones&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;AdministrarAplicaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Aplicaciones --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Ingreso IPS&quot;&gt;
     &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
     &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
     &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
     &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
-  &lt;/test&gt; &lt;!-- Portal Famisanar WEB - Menu IPS --&gt;
-  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Portal Famisanar WEB - Menu Empleador&quot;&gt;
+  &lt;/test&gt; &lt;!-- Ingreso IPS --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Autorizaciones&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
     &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
-    &lt;parameter name=&quot;seleniumURL&quot; value=&quot;&quot;/&gt;
-  &lt;/test&gt; &lt;!-- Portal Famisanar WEB - Menu Empleador --&gt;
-  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Portal Famisanar WEB - Menu Afiliado POS&quot;&gt;
-    &lt;parameter name=&quot;browser&quot; value=&quot;firefox&quot;/&gt;
-    &lt;parameter name=&quot;seleniumURL&quot; value=&quot;&quot;/&gt;
-  &lt;/test&gt; &lt;!-- Portal Famisanar WEB - Menu Afiliado POS --&gt;
+  &lt;/test&gt; &lt;!-- Autorizaciones --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Datos Del Empleador&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Datos Del Empleador --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Afiliaciones&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Afiliaciones --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Cartera&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Cartera --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Licencias E Incapacidades&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Licencias E Incapacidades --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Bases de Datos - Descargar Actualización&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Bases de Datos - Descargar Actualización --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;consulta prescripciones&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- consulta prescripciones --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Radicacion Digital&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Radicacion Digital --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Facturación Digital &quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menuAutorizaciones&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuIPS/datosMenuIPS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Facturación Digital  --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Movilidad a Subsidiado&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusEmpleador&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Movilidad a Subsidiado --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Actualizar Información de Empleador&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusEmpleador&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Actualizar Información de Empleador --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Afiliaciones_empleador&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusEmpleador&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Afiliaciones_empleador --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Opción Aportes y Cartera&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusEmpleador&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Opción Aportes y Cartera --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Licencia e Incapacidades&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusEmpleador&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Licencia e Incapacidades --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Movilidad a Subsidiado - afiliado pos&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusAfiliadoPos&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Movilidad a Subsidiado - afiliado pos --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Datos del Empleador&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusAfiliadoPos&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Datos del Empleador --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Actualizacion Datos de Contacto&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusAfiliadoPos&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Actualizacion Datos de Contacto --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Afiliado POS - Autorizaciones&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusAfiliadoPos&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Afiliado POS - Autorizaciones --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Afiliado POS - Portabilidad&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusAfiliadoPos&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Afiliado POS - Portabilidad --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Afiliado POS - Aportes y Cartera&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusAfiliadoPos&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Afiliado POS - Aportes y Cartera --&gt;
+  &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Afiliado POS - Certificaciones&quot;&gt;
+    &lt;parameter name=&quot;nombreHoja&quot; value=&quot;menusAfiliadoPos&quot;/&gt;
+    &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx&quot;/&gt;
+    &lt;parameter name=&quot;downloadFilepath&quot; value=&quot;src/test/resources/downloads&quot;/&gt;
+    &lt;parameter name=&quot;browser&quot; value=&quot;chrome&quot;/&gt;
+  &lt;/test&gt; &lt;!-- Afiliado POS - Certificaciones --&gt;
   &lt;test thread-count=&quot;1&quot; parallel=&quot;methods&quot; name=&quot;Portal Famisanar WEB - Menu Contratante PAC&quot;&gt;
     &lt;parameter name=&quot;nombreHoja&quot; value=&quot;contratantePac&quot;/&gt;
     &lt;parameter name=&quot;rutaArchivo&quot; value=&quot;src/test/resources/excel/contratantePAC/datosMenuContratantePAC.xlsx&quot;/&gt;
@@ -196,19 +321,79 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Portal Famisanar WEB - Login (0 classes)</span>
+                <span class="test-name">Usuario (1 class)</span>
               </li>
               <li>
-                <span class="test-name">Portal Famisanar WEB - Menu Administrador (1 class)</span>
+                <span class="test-name">Informe Usuario (0 classes)</span>
               </li>
               <li>
-                <span class="test-name">Portal Famisanar WEB - Menu IPS (0 classes)</span>
+                <span class="test-name">Aplicaciones (0 classes)</span>
               </li>
               <li>
-                <span class="test-name">Portal Famisanar WEB - Menu Empleador (0 classes)</span>
+                <span class="test-name">Ingreso IPS (0 classes)</span>
               </li>
               <li>
-                <span class="test-name">Portal Famisanar WEB - Menu Afiliado POS (0 classes)</span>
+                <span class="test-name">Autorizaciones (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Datos Del Empleador (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Afiliaciones (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Cartera (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Licencias E Incapacidades (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Bases de Datos - Descargar Actualización (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">consulta prescripciones (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Radicacion Digital (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Facturación Digital  (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Movilidad a Subsidiado (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Actualizar Información de Empleador (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Afiliaciones_empleador (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Opción Aportes y Cartera (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Licencia e Incapacidades (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Movilidad a Subsidiado - afiliado pos (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Datos del Empleador (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Actualizacion Datos de Contacto (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Afiliado POS - Autorizaciones (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Afiliado POS - Portabilidad (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Afiliado POS - Aportes y Cartera (0 classes)</span>
+              </li>
+              <li>
+                <span class="test-name">Afiliado POS - Certificaciones (0 classes)</span>
               </li>
               <li>
                 <span class="test-name">Portal Famisanar WEB - Menu Contratante PAC (0 classes)</span>
@@ -245,14 +430,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'administrarPerfiles')
+data.setCell(0, 1, 'administrarDatosContactabilidad')
 data.setCell(0, 2, 'menuAdministradorTest.usuarioTest.usuarioTest')
-data.setCell(0, 3, 32962);
+data.setCell(0, 3, 3803);
 window.suiteTableData['All_Test_Suite']= { tableData: data, tableDiv: 'times-div-All_Test_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 32 seconds</span>
+              <span class="suite-total-time">Total running time: 3 seconds</span>
               <div id="times-div-All_Test_Suite">
               </div> <!-- times-div-All_Test_Suite -->
             </div> <!-- times-div -->
@@ -285,23 +470,23 @@ return data;
               </div> <!-- configuration-suite before -->
               <div class="configuration-test before">
                 <span class="method-name">setUp(src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx, menuUsuarios)</span>
-                <span class="method-start">42 ms</span>
+                <span class="method-start">23 ms</span>
               </div> <!-- configuration-test before -->
               <div class="configuration-method before">
                 <span class="method-name">setUp(chrome)</span>
-                <span class="method-start">75 ms</span>
+                <span class="method-start">74 ms</span>
               </div> <!-- configuration-method before -->
               <div class="configuration-method before">
                 <span class="method-name">InicioSesion</span>
-                <span class="method-start">25300 ms</span>
+                <span class="method-start">4074 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">administrarPerfiles</span>
-                <span class="method-start">29706 ms</span>
+                <span class="method-name">administrarDatosContactabilidad</span>
+                <span class="method-start">11325 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">62670 ms</span>
+                <span class="method-start">15131 ms</span>
               </div> <!-- configuration-method after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

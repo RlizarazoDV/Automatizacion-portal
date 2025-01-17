@@ -2,14 +2,12 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-01T22:03:59 COT" name="All Test Suite" finished-at="2024-09-01T22:05:02 COT" duration-ms="63051">
+  <suite started-at="2024-12-27T12:38:54 COT" name="All Test Suite" finished-at="2024-12-27T12:39:10 COT" duration-ms="15636">
     <groups>
     </groups>
-    <test started-at="2024-09-01T22:03:59 COT" name="Portal Famisanar WEB - Login" finished-at="2024-09-01T22:03:59 COT" duration-ms="9">
-    </test> <!-- Portal Famisanar WEB - Login -->
-    <test started-at="2024-09-01T22:03:59 COT" name="Portal Famisanar WEB - Menu Administrador" finished-at="2024-09-01T22:05:02 COT" duration-ms="62980">
+    <test started-at="2024-12-27T12:38:54 COT" name="Usuario" finished-at="2024-12-27T12:39:09 COT" duration-ms="15459">
       <class name="menuAdministradorTest.usuarioTest.usuarioTest">
-        <test-method is-config="true" signature="setUp(java.lang.String,java.lang.String)[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:03:59 COT" name="setUp" finished-at="2024-09-01T22:03:59 COT" duration-ms="10" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.String,java.lang.String)[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2974f221]" started-at="2024-12-27T12:38:54 COT" name="setUp" finished-at="2024-12-27T12:38:54 COT" duration-ms="19" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -25,7 +23,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:03:59 COT" name="setUp" finished-at="2024-09-01T22:04:24 COT" duration-ms="25223" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2974f221]" started-at="2024-12-27T12:38:54 COT" name="setUp" finished-at="2024-12-27T12:38:58 COT" duration-ms="3996" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -36,33 +34,75 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method is-config="true" signature="InicioSesion()[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:04:24 COT" name="InicioSesion" finished-at="2024-09-01T22:04:28 COT" duration-ms="4406" status="PASS">
+        <test-method is-config="true" signature="InicioSesion()[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2974f221]" started-at="2024-12-27T12:38:58 COT" name="InicioSesion" finished-at="2024-12-27T12:39:05 COT" duration-ms="7251" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- InicioSesion -->
-        <test-method signature="administrarPerfiles()[pri:4, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:04:28 COT" name="administrarPerfiles" finished-at="2024-09-01T22:05:01 COT" duration-ms="32962" status="PASS">
+        <test-method signature="administrarDatosContactabilidad()[pri:5, instance:menuAdministradorTest.usuarioTest.usuarioTest@2974f221]" started-at="2024-12-27T12:39:05 COT" name="administrarDatosContactabilidad" finished-at="2024-12-27T12:39:09 COT" duration-ms="3803" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- administrarPerfiles -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:05:01 COT" name="tearDown" finished-at="2024-09-01T22:05:02 COT" duration-ms="351" status="PASS">
+        </test-method> <!-- administrarDatosContactabilidad -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2974f221]" started-at="2024-12-27T12:39:09 COT" name="tearDown" finished-at="2024-12-27T12:39:09 COT" duration-ms="343" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- menuAdministradorTest.usuarioTest.usuarioTest -->
-    </test> <!-- Portal Famisanar WEB - Menu Administrador -->
-    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu IPS" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
-    </test> <!-- Portal Famisanar WEB - Menu IPS -->
-    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Empleador" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
-    </test> <!-- Portal Famisanar WEB - Menu Empleador -->
-    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Afiliado POS" finished-at="2024-09-01T22:05:02 COT" duration-ms="1">
-    </test> <!-- Portal Famisanar WEB - Menu Afiliado POS -->
-    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Contratante PAC" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
+    </test> <!-- Usuario -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Informe Usuario" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Informe Usuario -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Aplicaciones" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Aplicaciones -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Ingreso IPS" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Ingreso IPS -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Autorizaciones" finished-at="2024-12-27T12:39:10 COT" duration-ms="1">
+    </test> <!-- Autorizaciones -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Datos Del Empleador" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Datos Del Empleador -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Afiliaciones" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Afiliaciones -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Cartera" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Cartera -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Licencias E Incapacidades" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Licencias E Incapacidades -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Bases de Datos - Descargar Actualización" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Bases de Datos - Descargar Actualización -->
+    <test started-at="2024-12-27T12:39:10 COT" name="consulta prescripciones" finished-at="2024-12-27T12:39:10 COT" duration-ms="1">
+    </test> <!-- consulta prescripciones -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Radicacion Digital" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Radicacion Digital -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Facturación Digital " finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Facturación Digital  -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Movilidad a Subsidiado" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Movilidad a Subsidiado -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Actualizar Información de Empleador" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Actualizar Información de Empleador -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Afiliaciones_empleador" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Afiliaciones_empleador -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Opción Aportes y Cartera" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Opción Aportes y Cartera -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Licencia e Incapacidades" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Licencia e Incapacidades -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Movilidad a Subsidiado - afiliado pos" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Movilidad a Subsidiado - afiliado pos -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Datos del Empleador" finished-at="2024-12-27T12:39:10 COT" duration-ms="1">
+    </test> <!-- Datos del Empleador -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Actualizacion Datos de Contacto" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Actualizacion Datos de Contacto -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Afiliado POS - Autorizaciones" finished-at="2024-12-27T12:39:10 COT" duration-ms="1">
+    </test> <!-- Afiliado POS - Autorizaciones -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Afiliado POS - Portabilidad" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Afiliado POS - Portabilidad -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Afiliado POS - Aportes y Cartera" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Afiliado POS - Aportes y Cartera -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Afiliado POS - Certificaciones" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
+    </test> <!-- Afiliado POS - Certificaciones -->
+    <test started-at="2024-12-27T12:39:10 COT" name="Portal Famisanar WEB - Menu Contratante PAC" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
     </test> <!-- Portal Famisanar WEB - Menu Contratante PAC -->
-    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Fuerza Comercial" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
+    <test started-at="2024-12-27T12:39:10 COT" name="Portal Famisanar WEB - Menu Fuerza Comercial" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
     </test> <!-- Portal Famisanar WEB - Menu Fuerza Comercial -->
-    <test started-at="2024-09-01T22:05:02 COT" name="Portal Famisanar WEB - Menu Refrencia y contraReferencia" finished-at="2024-09-01T22:05:02 COT" duration-ms="0">
+    <test started-at="2024-12-27T12:39:10 COT" name="Portal Famisanar WEB - Menu Refrencia y contraReferencia" finished-at="2024-12-27T12:39:10 COT" duration-ms="0">
       <class name="menuAdministradorTest.usuarioTest.usuarioTest">
-        <test-method is-config="true" signature="setUpSuite()[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2313052e]" started-at="2024-09-01T22:03:59 COT" name="setUpSuite" finished-at="2024-09-01T22:03:59 COT" duration-ms="11" status="PASS">
+        <test-method is-config="true" signature="setUpSuite()[pri:0, instance:menuAdministradorTest.usuarioTest.usuarioTest@2974f221]" started-at="2024-12-27T12:38:54 COT" name="setUpSuite" finished-at="2024-12-27T12:38:54 COT" duration-ms="15" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpSuite -->

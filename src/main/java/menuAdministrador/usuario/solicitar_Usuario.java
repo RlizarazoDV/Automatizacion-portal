@@ -23,7 +23,7 @@ public class solicitar_Usuario extends basePage
     private final FluentWait<WebDriver> waitMensaje;
 
 
-    private final By tabServicios = By.xpath("//img[contains(@class, 'iceGphImg tabServicios') and contains(@src, '/Portal/imgs/tab_servicios_1.jpg?v=1724853903068')]");
+    private final By tabServicios = By.xpath("//img[contains(@class, 'iceGphImg tabServicios') and contains(@src, '/Portal/imgs/tab_servicios_1.')]");
     private final By linkAdministrador = By.linkText("Administrador");
     private final By opcionSolicitarUsuario = By.xpath("//div[@onclick=\"showOption('option1');\"]");
     private final By linkSolicitarUsuario = By.linkText("Solicitar Usuario");

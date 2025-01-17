@@ -9,12 +9,12 @@ import Configuracion.basePage;
 
 import java.time.Duration;
 
-public class Actualizar_Informacion_Afiliado extends basePage{
+public class Actualizar_Informacion_Empleador extends basePage{
     private final FluentWait<WebDriver> wait;
     private final FluentWait<WebDriver> waitP;
     private final FluentWait<WebDriver> waitL;
     private final FluentWait<WebDriver> waitMensaje;
-    private final By tabServicios = By.xpath("//img[contains(@class, 'iceGphImg tabServicios') and contains(@src, '/Portal/imgs/tab_servicios_1.jpg?v=1724853903068')]");
+    private final By tabServicios = By.xpath("//img[contains(@class, 'iceGphImg tabServicios') and contains(@src, '/Portal/imgs/tab_servicios_1.')]");
     private final By linkEmpleador = By.linkText("Empleador");
     private final By linkDatosEmpleador = By.xpath("//*[contains(text(),'Datos del Empleador')]");
     private final By opcionActualizarEmpleador = By.linkText("Actualizar Información Empleador");
@@ -24,7 +24,7 @@ public class Actualizar_Informacion_Afiliado extends basePage{
 
 
 
-    public Actualizar_Informacion_Afiliado(WebDriver webDriver) {
+    public Actualizar_Informacion_Empleador(WebDriver webDriver) {
         super(webDriver);
         this.wait = new FluentWait<>(webDriver)
                 .withTimeout(Duration.ofSeconds(10))
@@ -47,6 +47,7 @@ public class Actualizar_Informacion_Afiliado extends basePage{
                 .ignoring(java.util.NoSuchElementException.class);
 
     }
+
     public void ingresarMenuEmpleador()
     {
         WebElement tabServiciosElement = wait.until(ExpectedConditions.elementToBeClickable(tabServicios));

@@ -2,7 +2,7 @@ package menuAdministradorTest.usuarioTest;
 
 import Configuracion.ExcelDataHandler;
 import ConfiguracionTest.baseTest;
-import login.login;
+
 import loginTest.loginTest;
 import menuAdministrador.usuario.administrar_Perfiles;
 import menuAdministrador.usuario.administrar_Solicitudes;
@@ -20,13 +20,14 @@ import com.aventstack.extentreports.Status;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
+import reports.screenshotManager;
+
 import java.io.IOException;
 import java.util.Map;
 
 
 
-public class usuarioTest extends baseTest {
-
+public class   usuarioTest extends baseTest {
 
 
     private solicitar_Usuario opcUsuarios;
@@ -36,7 +37,7 @@ public class usuarioTest extends baseTest {
     private administrar_Datos_Contactabilidad opcAdminDC;
     private static final Logger logger = LogManager.getLogger(usuarioTest.class);
     private static ExtentReports extent = ExtentManager.getInstance();
-    private static ExtentTest test;
+    private static ExtentTest parentTest;
     private String rutaArchivo;
     private String nombreHoja;
 
@@ -47,13 +48,14 @@ public class usuarioTest extends baseTest {
         this.nombreHoja = nombreHoja;
 
         logger.info("Configurando la prueba...");
-        test = extent.createTest("Usuario Test");
 
+        parentTest = extent.createTest("Administrador-Usuario");
+        parentTest.info("Iniciando pruebas de Usuario.");
 
     }
+
     @BeforeMethod
-    public void InicioSesion()
-    {
+    public void InicioSesion() {
         loginTest loginTestPage = new loginTest();
         loginTestPage.setUp(rutaArchivo, nombreHoja);
         loginTestPage.testLogin();
@@ -63,387 +65,261 @@ public class usuarioTest extends baseTest {
 
     }
 
+    private Map<String, String> getData(String sheetName) {
+        try {
+            return ExcelDataHandler.getDataFromExcel(rutaArchivo, nombreHoja, sheetName);
+        } catch (IOException e) {
+            logger.error("Error al leer los datos del Excel: " + e.getMessage());
+            parentTest.log(Status.FAIL, "Error al leer los datos del Excel: " + e.getMessage());
+            return null;
+        }
+    }
+    private void validateData(Map<String, String> data, String errorMessage) {
+        if (data == null || data.isEmpty()) {
+            logger.error(errorMessage);
+            throw new IllegalArgumentException(errorMessage);
+        }
+    }
+
 /*
+
    @Test(priority = 1)
     public void solicitarUsuario()
     {
 
-        opcUsuarios = new solicitar_Usuario(driver);
+        ExtentTest test = parentTest.createNode("Prueba de Solicitar Usuario");
 
+        logger.info("Inicio de la prueba: solicitar Usuario...");
+        test.info("Iniciando prueba de solicitud de usuario...");
 
-        logger.info("Inicio de la prueba: solicitarUsuario...");
-        test.log(Status.INFO, "Iniciando prueba: solicitarUsuario...");
-
-        Map<String, String> solicitudData = null;
-        try
-        {
-            solicitudData = ExcelDataHandler.getDataFromExcel(rutaArchivo, nombreHoja, "Solicitar Usuario");
-        } catch (IOException e)
-        {
-            logger.error("Error al leer los datos del Excel: " + e.getMessage());
-            test.log(Status.FAIL, "Error al leer los datos del Excel: " + e.getMessage());
-            return;
-        }
-
-        if (solicitudData == null || solicitudData.isEmpty())
-        {
-            logger.error("No se encontraron datos para la prueba.");
-            test.log(Status.FAIL, "No se encontraron datos para la prueba.");
-            return;
-        }
-
+        Map<String, String> solicitudData = getData("Solicitar Usuario");
+        validateData(solicitudData, "No se encontraron datos para la prueba de solicitud de usuario.");
         logger.info("Datos leídos del Excel: " + solicitudData);
 
-        try
-        {
-            String tipoIdent = solicitudData.get("Tipo de identificación");
-            String numIdent = solicitudData.get("Número de identificación");
-            String Pnombre = solicitudData.get("Primer Nombre");
-            String Snombre = solicitudData.get("Segundo Nombre");
-            String Papellido = solicitudData.get("Primer Apellido");
-            String Sapellido = solicitudData.get("Segundo Apellido");
-            String dirEmail = solicitudData.get("Correo Electronico");
-            String grupoUno = solicitudData.get("Grupo ID 1");
-            String grupoDos = solicitudData.get("Grupo ID 2");
-            String grupoTres = solicitudData.get("Grupo ID 3");
-            String grupoCuatro = solicitudData.get("Grupo ID 4");
-            String idApp = solicitudData.get("Id Aplicación");
-            String idMenu = solicitudData.get("Id Menu");
-
-
-
+        try {
             opcUsuarios.solicitarUsuario();
-            opcUsuarios.llenarFormularioSolicitud(tipoIdent, numIdent);
-            opcUsuarios.completarDatosPersonales(Pnombre, Snombre, Papellido, Sapellido, dirEmail);
-            opcUsuarios.completarAsignacionPerfil(grupoUno, grupoDos, grupoTres, grupoCuatro, idApp, idMenu);
+            opcUsuarios.llenarFormularioSolicitud(
+                    solicitudData.get("Tipo de identificación"),
+                    solicitudData.get("Número de identificación")
+            );
+            opcUsuarios.completarDatosPersonales(
+                    solicitudData.get("Primer Nombre"),
+                    solicitudData.get("Segundo Nombre"),
+                    solicitudData.get("Primer Apellido"),
+                    solicitudData.get("Segundo Apellido"),
+                    solicitudData.get("Correo Electronico")
+            );
+            opcUsuarios.completarAsignacionPerfil(
+                    solicitudData.get("Grupo ID 1"),
+                    solicitudData.get("Grupo ID 2"),
+                    solicitudData.get("Grupo ID 3"),
+                    solicitudData.get("Grupo ID 4"),
+                    solicitudData.get("Id Aplicación"),
+                    solicitudData.get("Id Menu")
+            );
             opcUsuarios.botonAceptar();
 
-        }catch(Exception e)
-        {
-
-            logger.error("Error al acceder al menu solicitar usuario: " + e.getMessage());
-            test.log(Status.FAIL, "Error al acceder al menu solicitar usuario: " + e.getMessage());
-
-        }
-        try
-        {
-
             String[] respuesta = opcUsuarios.validarRespuestas();
-            String mensajeUno = respuesta[0];
-            String mensajeDos = respuesta[1];
-            Assert.assertEquals(mensajeUno, "Usuario Creado");
-            Assert.assertEquals(mensajeDos, "Perfil asignado");
+            Assert.assertEquals(respuesta[0], "Usuario Creado");
+            Assert.assertEquals(respuesta[1], "Perfil asignado");
 
             logger.info("Creó Usuario y Asignó Perfil");
-            test.log(Status.PASS, "Prueba exitosa");
-            logger.info("Fin de la prueba: solicitarUsuario...");
-            test.log(Status.INFO, "Fin de la prueba: solicitarUsuario");
-
-        }catch(Exception e)
-        {
+            test.log(Status.PASS, "Prueba de solicitud de usuario exitosa.");
+        } catch (Exception e) {
             logger.error("Error al solicitar usuario: " + e.getMessage());
-            test.log(Status.FAIL, "Error al crear o asignar el usuario : " + e.getMessage());
-
+            test.log(Status.FAIL, "Error al crear o asignar el usuario: " + e.getMessage());
+            screenshotManager.logErrorWithScreenshot(driver, test, "error_solicitud_usuario", e.getMessage());
+        } finally {
+            logger.info("Fin de la prueba: solicitarUsuario...");
+            test.info("Fin de la prueba: solicitar Usuario...");
         }
+
     }
 
 
 
- */
-/*
 
     @Test(priority = 2)
     public void administrarSolicitudes() {
 
-        opcAdminS = new administrar_Solicitudes(driver);
-
-        logger.info("Inicio de la prueba: administrarSolicitudes...");
-        test.log(Status.INFO, "Iniciando prueba: administrarSolicitudes...");
-
-        Map<String, String> dataS = null;
-        try {
-            dataS = ExcelDataHandler.getDataFromExcel(rutaArchivo, nombreHoja, "Administrar  Solicitudes");
-        } catch (IOException e) {
-
-            logger.error("Error al leer los datos del Excel: " + e.getMessage());
-            test.log(Status.FAIL, "Error al leer los datos del Excel: " + e.getMessage());
-            return;
-
-        }
-        if (dataS == null || dataS.isEmpty()) {
-            logger.error("No se encontraron datos para la prueba.");
-            test.log(Status.FAIL, "No se encontraron datos para la prueba.");
-            return;
-        }
+        ExtentTest test = parentTest.createNode("Prueba de Administrar Solicitudes");
+        logger.info("Inicio de la prueba: administrar Solicitudes...");
+        test.info("Iniciando prueba de administración de solicitudes...");
+        Map<String, String> dataS = getData("Administrar  Solicitudes");
+        validateData(dataS, "No se encontraron datos para la prueba de administración de solicitudes.");
 
         logger.info("Datos leídos del Excel: " + dataS);
 
-        String tip_id = dataS.get("Tipo de identificación");
-        String num_id = dataS.get("Número de identificación");
-        String est = dataS.get("Estado");
-
-
+        opcAdminS = new administrar_Solicitudes(driver);
         opcAdminS.ingresoAdministrarSolicitudes();
-        opcAdminS.formularioAdministrarSolicitudes(tip_id, num_id, est);
+        opcAdminS.formularioAdministrarSolicitudes(
+                dataS.get("Tipo de identificación"),
+                dataS.get("Número de identificación"),
+                dataS.get("Estado")
+        );
 
         try {
-            boolean metodoEjecutado = false;
+            opcAdminS.validarTabla();
+            test.log(Status.PASS, "Administración de solicitudes exitosa.");
+            logger.info("Administración de solicitudes exitosa.");
+        }  catch (Exception e) {
+            String mensaje = opcAdminS.compararRespuesta();
 
-            try {
-                opcAdminS.validarTabla();
-
-                test.log(Status.PASS, "Administración de solicitudes exitosa .");
-                logger.info("Administración de solicitudes exitosa");
-                metodoEjecutado = true;
-            } catch (Exception e) {
-                System.out.println("validarTabla() no se ejecutó: " + e.getMessage());
+            if (mensaje.equals("No hay resultados para mostrar")) {
+                test.log(Status.PASS, "No hay resultados para mostrar");
+                logger.info("No hay resultados para mostrar");
+            } else {
+                logger.error("Error al ejecutar los métodos: " + e.getMessage());
+                test.log(Status.FAIL, "Error al ejecutar los métodos: " + e.getMessage());
+                screenshotManager.logErrorWithScreenshot(driver, test, "error_Administracion_de_solicitudes", e.getMessage());
             }
-
-            // Intentar ejecutar el segundo método solo si el primero no se ejecutó con éxito
-            if (!metodoEjecutado) {
-                try {
-                    String mensaje = opcAdminS.compararRespuesta();
-                    Assert.assertEquals(mensaje, "No hay resultados para mostrar");
-                    // Si el método se ejecuta correctamente, marcar como exitoso y registrar el log
-                    test.log(Status.PASS, "No hay resultados para mostrar");
-                    logger.info("No hay resultados para mostrar");
-                    metodoEjecutado = true;
-                } catch (AssertionError | Exception e) {
-                    System.out.println("ejecución fallida: " + e.getMessage());
-                }
-            }
-
-            // Si ninguno de los métodos se ejecutó correctamente, manejar el error
-            if (!metodoEjecutado) {
-                throw new Exception("Ninguno de los métodos se ejecutó correctamente.");
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-            test.log(Status.FAIL, "Error al ejecutar los métodos: " + e.getMessage());
-            logger.error("administrar solicitudes no esta cargando datos: No hay resultados para mostrar");
-            test.log(Status.FAIL, "Prueba fallida");
+        } finally {
+            logger.info("Fin de la prueba: administrarSolicitudes...");
+            test.info("Fin de la prueba: administración de solicitudes...");
         }
-
-        logger.info("Fin de la prueba: administrarSolicitudes...");
-        test.log(Status.INFO, "Fin de la prueba: administrar Solicitudes");
 
     }
 
 
 
- */
-
-/*
     @Test(priority = 3)
-    public void administrarUsuario()
-    {
-        opcAdministrar = new administrar_Usuario(driver);
-        logger.info("Inicio de la prueba: administrarUsuario...");
-        test.log(Status.INFO, "Iniciando prueba: administrarUsuario...");
+    public void administrarUsuario() {
 
-        Map<String, String> dataU = null;
-        try
-        {
-            dataU = ExcelDataHandler.getDataFromExcel(rutaArchivo, nombreHoja, "Administrar  Usuario");
+        ExtentTest test = parentTest.createNode("Prueba de Administrar Usuario");
+        logger.info("Inicio de la prueba: administrar Usuario...");
+        test.info("Iniciando prueba de administración de usuario...");
 
-        } catch (IOException e) {
-
-            logger.error("Error al leer los datos del Excel: " + e.getMessage());
-            test.log(Status.FAIL, "Error al leer los datos del Excel: " + e.getMessage());
-            return;
-
-        }
-        if (dataU == null || dataU.isEmpty())
-        {
-            logger.error("No se encontraron datos para la prueba.");
-            test.log(Status.FAIL, "No se encontraron datos para la prueba.");
-            return;
-        }
+        Map<String, String> dataU = getData("Administrar  Usuario");
+        validateData(dataU, "No se encontraron datos para la prueba de administración de usuario.");
 
         logger.info("Datos leídos del Excel: " + dataU);
 
-        String tipId = dataU.get("Tipo de identificación");
-        String numId = dataU.get("Número de identificación");
-        String Sapellido = dataU.get("Segundo Apellido");
-
-        try
-        {
-
+        opcAdministrar = new administrar_Usuario(driver);
+        try {
             opcAdministrar.ingresoAdministrarUsuario();
-            opcAdministrar.formularioAdministrarUsuario(tipId, numId);
-            opcAdministrar.modificarUsuario(Sapellido);
+            opcAdministrar.formularioAdministrarUsuario(
+                    dataU.get("Tipo de identificación"),
+                    dataU.get("Número de identificación")
+            );
+            opcAdministrar.modificarUsuario(dataU.get("Segundo Apellido"));
+            test.log(Status.PASS, "Ingreso a administración de usuario exitosa.");
+            logger.info("Ingreso a administración de usuario exitosa.");
 
-            logger.info("ingreso administrar usuario exitosa ");
-            test.log(Status.PASS, "ingreso Administración de usuario exitosa");
+            String mensaje = opcAdministrar.compara();
+            Assert.assertEquals(mensaje, "Actualización exitosa");
+            test.log(Status.PASS, "Actualización de usuario exitosa.");
+            logger.info("Actualización de usuario exitosa.");
 
         } catch (Exception e) {
             logger.error("Error ingresando administrar usuario: " + e.getMessage());
-            test.log(Status.FAIL, "Prueba fallida: " + e.getMessage());
-        }
-        try
-        {
-          String mensaje=opcAdministrar.compara();
-            Assert.assertEquals(mensaje, "Actualización exitosa");
-            logger.info(" Actualizacion de  usuario exitosa ");
-            test.log(Status.PASS, "Actualizacion de usuario exitosa");
-
-        }catch(Exception e) {
-
-            logger.error("Error actualizando usuario: " + e.getMessage());
-            test.log(Status.FAIL, "Error actualizando usuario: " + e.getMessage());
-
+            test.log(Status.FAIL, "Error ingresando administrar usuario: " + e.getMessage());
+            screenshotManager.logErrorWithScreenshot(driver, test, "error_ingresando_administrar_usuario", e.getMessage());
+        } finally {
+            logger.info("Fin de la prueba: administrarUsuario...");
+            test.info("Fin de la prueba: administración de usuario...");
         }
 
-        logger.info("Fin de la prueba: administrarUsuario...");
-        test.log(Status.INFO, "Fin de la prueba: administrarUsuario");
+
+    }
+
+
+    @Test(priority = 4)
+    public void administrarPerfiles() {
+        ExtentTest test = parentTest.createNode("Prueba de Administrar  perfiles");
+        logger.info("Inicio de la prueba: Administrar  perfiles...");
+        test.info("Iniciando prueba de Administración de perfiles...");
+
+        Map<String, String> dataP = getData("Administrar  Perfiles");
+        validateData(dataP, "No se encontraron datos para la prueba de administración de perfiles.");
+
+        logger.info("Datos leídos del Excel: " + dataP);
+
+        opcAdminP = new administrar_Perfiles(driver);
+        try {
+            opcAdminP.ingresoAdministrarPerfiles();
+            opcAdminP.formularioAdministrarPerfiles(
+                    dataP.get("Tipo de identificación"),
+                    dataP.get("Número de identificación")
+            );
+            opcAdminP.asignarFiltroPerfil(
+                    dataP.get("Usuario"),
+                    dataP.get("Nombre"),
+                    dataP.get("PerfilApp"),
+                    dataP.get("PerfilMenu")
+            );
+            opcAdminP.escogeFiltro(
+                    dataP.get("Filtro"),
+                    dataP.get("Descripcion")
+            );
+            logger.info("ingreso administrar perfiles exitosa ");
+            test.log(Status.PASS, "ingreso Administración de perfiles exitosa");
+
+            String mensaje = opcAdminP.compararRespuesta();
+            Assert.assertEquals(mensaje, "La asignación del filtro se ha realizado exitosamente");
+            test.log(Status.PASS, "La asignación del filtro se ha realizado exitosamente.");
+            logger.info("La asignación del filtro se ha realizado exitosamente.");
+
+
+        } catch (Exception e) {
+            logger.error("Error al administrar perfiles: " + e.getMessage());
+            test.log(Status.FAIL, "Error al administrar perfiles: " + e.getMessage());
+            screenshotManager.logErrorWithScreenshot(driver, test, "error_administrar_perfiles", e.getMessage());
+        } finally {
+            logger.info("Fin de la prueba: administrarPerfiles...");
+        }
     }
 
 
  */
 
-    @Test(priority = 4)
-    public void administrarPerfiles()
-    {
-        opcAdminP = new administrar_Perfiles(driver);
-        logger.info("Inicio de la prueba: administrarPerfiles...");
-        test.log(Status.INFO, "Iniciando prueba: administrarPerfiles...");
-
-        Map<String, String> dataP = null;
-        try
-        {
-            dataP = ExcelDataHandler.getDataFromExcel(rutaArchivo, nombreHoja, "Administrar  Perfiles");
-
-        } catch (IOException e) {
-
-            logger.error("Error al leer los datos del Excel: " + e.getMessage());
-            test.log(Status.FAIL, "Error al leer los datos del Excel: " + e.getMessage());
-            return;
-
-        }
-        if (dataP == null || dataP.isEmpty())
-        {
-            logger.error("No se encontraron datos para la prueba.");
-            test.log(Status.FAIL, "No se encontraron datos para la prueba.");
-            return;
-        }
-
-        logger.info("Datos leídos del Excel: " + dataP);
-
-        try {
-
-            String tipo_id = dataP.get("Tipo de identificación");
-            String idP = dataP.get("Número de identificación");
-            String Usuario= dataP.get("Usuario");
-            String Nombre= dataP.get("Nombre");
-            String perfilapp= dataP.get("PerfilApp");
-            String perfilmenu = dataP.get("PerfilMenu");
-            String Filtro = dataP.get("Filtro");
-            String Descripcion = dataP.get("Descripcion");
-
-
-            opcAdminP.ingresoAdministrarPerfiles();
-            opcAdminP.formularioAdministrarPerfiles(tipo_id, idP);
-            opcAdminP.asignarFiltroPerfil(Usuario,Nombre,perfilapp,perfilmenu);
-            opcAdminP.escogeFiltro(Filtro,Descripcion);
-
-
-            logger.info("ingreso administrar perfiles exitosa ");
-            test.log(Status.PASS, "ingreso Administración de perfiles exitosa");
-
-        }catch(Exception e)
-        {
-            logger.error("Error ingresando administrar perfiles: " + e.getMessage());
-            test.log(Status.FAIL, "Prueba fallida: " + e.getMessage());
-        }
-
-        try
-        {
-            String mensa = opcAdminP.compararRespuesta();
-            Assert.assertEquals(mensa, "La asignación del filtro se ha realizado exitosamente");
-
-            logger.info("Administración de perfiles exitosa");
-            test.log(Status.PASS, "Administración de perfiles exitosa");
-
-        } catch (Exception e)
-        {
-            logger.error("Error Asignando perfiles : " + e.getMessage());
-            test.log(Status.FAIL, "Error Asignando perfiles: " + e.getMessage());
-        }
-        logger.info("Fin de la prueba: administrarPerfiles...");
-        test.log(Status.INFO, "Fin de la prueba: administrarPerfiles");
-    }
-/*
     @Test(priority = 5)
-    public void administrarDatosContactabilidad()
-    {
-        opcAdminDC = new administrar_Datos_Contactabilidad(driver);
+    public void administrarDatosContactabilidad() {
+        ExtentTest test = parentTest.createNode("Prueba Administrar Datos Contactabilidad");
+
         logger.info("Inicio de la prueba: Administrar Datos Contactabilidad...");
-        test.log(Status.INFO, "Iniciando prueba: Administrar Datos Contactabilidad...");
+        test.info("Iniciando prueba de Administrar Datos Contactabilidad...");
 
-        Map<String, String> dataDC = null;
-        try
-        {
-            dataDC = ExcelDataHandler.getDataFromExcel(rutaArchivo, nombreHoja, "Administrar  Datos Contactabilidad");
-
-        } catch (IOException e) {
-
-            logger.error("Error al leer los datos del Excel: " + e.getMessage());
-            test.log(Status.FAIL, "Error al leer los datos del Excel: " + e.getMessage());
-            return;
-
-        }
-        if (dataDC == null || dataDC.isEmpty())
-        {
-            logger.error("No se encontraron datos para la prueba.");
-            test.log(Status.FAIL, "No se encontraron datos para la prueba.");
-            return;
-        }
+        Map<String, String> dataDC = getData("Administrar  Datos Contactabilidad");
+        validateData(dataDC, "No se encontraron datos para la prueba de administración de datos de contactabilidad.");
 
         logger.info("Datos leídos del Excel: " + dataDC);
 
-        String tipoId = dataDC.get("Tipo de identificación");
-        String numeId = dataDC.get("Número de identificación");
-        String correoEl = dataDC.get("Correo Electronico");
+        opcAdminDC = new administrar_Datos_Contactabilidad(driver);
 
         try {
-
             opcAdminDC.abrirMenuAdministrarDatosContactabilidad();
-            opcAdminDC.modificarDatos(tipoId,numeId,correoEl);
-
-            logger.info("ingreso administrar datos contactabilidad exitosa ");
-            test.log(Status.PASS, "ingreso Administración de datos contactabilidad exitosa");
-
-        }catch(Exception e)
-        {
-            logger.error("Error ingresando administrar datos contactabilidad: " + e.getMessage());
-            test.log(Status.FAIL, "Error ingresando administrar datos contactabilidad: " + e.getMessage());
-            test.log(Status.FAIL, "Prueba fallida: " + e.getMessage());
-        }
-
-        try
-        {
-            String msj = opcAdminDC.modificarDatos(tipoId,numeId,correoEl);
+            logger.info("ingreso administrar perfiles exitosa ");
+            test.log(Status.PASS, "ingreso Administración de perfiles exitosa");
+            opcAdminDC.modificarDatos(
+                    dataDC.get("Tipo de identificación"),
+                    dataDC.get("Número de identificación"),
+                    dataDC.get("Correo")
+            );
+            String msj = opcAdminDC.modificarDatos(dataDC.get("Tipo de identificación"),
+                    dataDC.get("Número de identificación"),
+                    dataDC.get("Correo")
+            );
             Assert.assertEquals(msj, "Actualización exitosa");
+            test.log(Status.PASS, "Administración de datos de contactabilidad exitosa.");
+            logger.info("Administración de datos de contactabilidad exitosa.");
 
-            logger.info("Administración de perfiles exitosa");
-            test.log(Status.PASS, "Administración de perfiles exitosa");
-
-        } catch (Exception e)
-        {
-            logger.error("Error administrando datos contactabilidad: : " + e.getMessage());
-            test.log(Status.FAIL, "Error en  administrar datos contactabilidad:: " + e.getMessage());
+        } catch (Exception e) {
+            logger.error("Error al administrar datos de contactabilidad: " + e.getMessage());
+            test.log(Status.FAIL, "Error al administrar datos de contactabilidad: " + e.getMessage());
+            screenshotManager.logErrorWithScreenshot(driver, test, "error_administrar_datos_contactabilidad", e.getMessage());
+        } finally {
+            logger.info("Fin de la prueba: administrar Datos Contactabilidad...");
+            test.info("Fin de la prueba: Administración de perfiles...");
         }
-        logger.info("Fin de la prueba:administrar datos contactabilidad:...");
-        test.log(Status.INFO, "Fin de la prueba: administrar datos contactabilidad:");
     }
 
-*/
+
+
     @AfterMethod
     public void tearDown()
     {
         logger.info("Cerrando el navegador...");
-        test.log(Status.INFO, "Cerrando el navegador...");
+        parentTest.log(Status.INFO, "Cerrando el navegador...");
         if (driver != null)
         {
             driver.quit();
@@ -451,6 +327,6 @@ public class usuarioTest extends baseTest {
     }
 
 
-   }
+}
 
 

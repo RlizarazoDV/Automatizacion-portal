@@ -18,7 +18,7 @@ public class ingresoIPS extends basePage {
     private final FluentWait<WebDriver> wait;
     private final FluentWait<WebDriver> waitP;
     private final FluentWait<WebDriver> waitL;
-    private final By tabServicios = By.id("//img[contains(@class, 'iceGphImg tabServicios') and contains(@src, '/Portal/imgs/tab_servicios_1.jpg?v=1724853903068')]");
+    private final By tabServicios = By.xpath("//img[contains(@class, 'iceGphImg tabServicios')and contains(@src, '/Portal/imgs/tab_servicios_1')]");
     private final By IPs = By.linkText("IPS");
     private final By selectIPS = By.id("j_id114:ips");
     private final By selectSucursal = By.id("j_id114:sucIps");

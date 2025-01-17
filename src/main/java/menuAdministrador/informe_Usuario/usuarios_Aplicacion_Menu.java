@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import Configuracion.basePage;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,82 +12,91 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.Set;
 public class usuarios_Aplicacion_Menu extends basePage {
-    private final WebDriverWait wait;
-    private final WebDriverWait waitMensaje;
+    private final FluentWait<WebDriver> wait;
+    private final FluentWait<WebDriver> waitP;
+    private final FluentWait<WebDriver> waitL;
+    private final FluentWait<WebDriver> waitMensaje;
 
-    private final By tabServicios = By.id("tabServicios");
-    private final By linkAdministrador = By.linkText("Administrador");
-    private final By linkinformeUsuario = By.xpath("//div[contains(., 'Informes Usuarios')]");
-    private final By linkLogUsuario = By.linkText("Log Usuarios");
-    private final By tipoIdentificacion = By.id("j_id112:tipoIdentificacion");
-    private final By id = By.id("j_id112:identificacion");
-    private final By buscarButton = By.id("j_id112:searchButton");
-    private final By imprimirbutton = By.xpath("//a[@href='/Portal/downloadservlet']");
+
+    private final By linkUsuarioPorAplicacionPorMenu= By.linkText("Usuarios por Aplicación por Menú");
+    private final By linkaplicacion = By.xpath("//*[contains(text(),'Aplicación:')]//following::select[1]");
+    private final By linkbotonAceptar = By.xpath("//input[contains(@class,'iceCmdBtn')and contains(@src, '/Portal/imgs/btnAceptar.gif')]");
+    private final By aplicacionAdmin = By.xpath("//*[contains(text(),'Administrador')and contains(@class,'iceOutTxt')]");
+    private final By linkbotonDetalle = By.xpath("//input[contains(@class,'iceCmdBtn')and contains(@src, '/Portal/imgs/btnVerDetalle.gif')]");
+    private final By imprimirbutton = By.xpath("//input[contains(@class,'iceCmdBtn')and contains(@src, '/Portal/imgs/btnImprimir.gif')]");
+
     public usuarios_Aplicacion_Menu(WebDriver webDriver) {
         super(webDriver);
 
-        this.wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        this.wait = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
 
-        this.waitMensaje = new WebDriverWait(webDriver, Duration.ofSeconds(30));
+        this.waitP = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(20))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
+
+        this.waitL = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(35))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
+
+        this.waitMensaje = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(35))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
 
     }
-    public void ingresarMenuAdministrador() {
-        WebElement tabServiciosElement = wait.until(ExpectedConditions.elementToBeClickable(tabServicios));
-        tabServiciosElement.click();
+    public void ingresarAplicacionPorMenu() {
 
-        WebElement linkAdminElement = wait.until(ExpectedConditions.elementToBeClickable(linkAdministrador));
-        linkAdminElement.click();
+        WebElement linkAplicacionMenu = wait.until(ExpectedConditions.elementToBeClickable(linkUsuarioPorAplicacionPorMenu));
+        linkAplicacionMenu.click();
     }
 
-    // Método para seleccionar la opción de solicitar usuario
-    public void informeusuario() {
-        WebElement opcionUsuarioElement = wait.until(ExpectedConditions.elementToBeClickable(linkinformeUsuario));
-        opcionUsuarioElement.click();
 
-        WebElement linkUsuarioElement = wait.until(ExpectedConditions.elementToBeClickable(linkLogUsuario));
-        linkUsuarioElement.click();
+    public void escogeAplicacion(String aplicacion) {
+
+        Select opcionAplicacion = new Select(waitP.until(ExpectedConditions.elementToBeClickable(linkaplicacion)));
+        opcionAplicacion.selectByVisibleText(aplicacion);
+
+        WebElement linkbotonaplicacion= wait.until(ExpectedConditions.elementToBeClickable(linkbotonAceptar));
+        linkbotonaplicacion.click();
     }
 
-    // Método para completar el formulario de solicitud de usuario
-    public void llenarFormularioLogUsuario(String tipoIde, String numIde) {
-        Select tipoIdentificacionDropdown = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(tipoIdentificacion)));
-        tipoIdentificacionDropdown.selectByVisibleText(tipoIde);
 
-        WebElement campoIdentificacionElement = webDriver.findElement(id);
-        campoIdentificacionElement.sendKeys(numIde);
+    public void SeleccinaFiltro() {
 
-        WebElement botonAceptarElement = webDriver.findElement(buscarButton);
+        WebElement linkEscogeFiltro= wait.until(ExpectedConditions.elementToBeClickable(aplicacionAdmin));
+        linkEscogeFiltro.click();
+
+        WebElement botonAceptarElement = webDriver.findElement(linkbotonDetalle);
         botonAceptarElement.click();
     }
 
     public void imprimirInforme() {
+
+
         String mainTab = webDriver.getWindowHandle();
 
-        WebElement botonImprimir = waitMensaje.until(ExpectedConditions.elementToBeClickable(imprimirbutton));
-        botonImprimir.click();
+        WebElement BotonImprimir = waitMensaje.until(ExpectedConditions.elementToBeClickable(imprimirbutton));
+        BotonImprimir.click();
+
+        Set<String> allWindows = webDriver.getWindowHandles();
 
 
-        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+        for (String window : allWindows) {
+            if (!window.equals(mainTab)) {
+                webDriver.switchTo().window(window);
+                System.out.println("urlimpresion");
 
-        Set<String> idVentanas = webDriver.getWindowHandles();
-
-        for (String ventanaActual : idVentanas) {
-            if (!ventanaActual.equalsIgnoreCase(mainTab)) {
-                webDriver.switchTo().window(ventanaActual);
-
-
-                wait.until(ExpectedConditions.urlContains("/Portal/downloadservlet"));
-
-
-                WebElement pageTitle = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Log de Usuario')]")));
-                if (pageTitle.isDisplayed()) {
-                    System.out.println("La página se ha abierto correctamente.");
-                } else {
-                    System.out.println("La página no se ha abierto correctamente.");
-                }
-
+                break;
             }
         }
+            System.out.println("Nueva URL: " + webDriver.getCurrentUrl());
+        }
+
     }
 
-}
+

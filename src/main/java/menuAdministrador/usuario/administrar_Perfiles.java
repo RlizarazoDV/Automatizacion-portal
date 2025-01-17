@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 public class administrar_Perfiles extends basePage {
-    private final WebDriverWait wait;
-    private final WebDriverWait waitMensaje;
-    private final WebDriverWait waitP;
-    private final WebDriverWait waitL;
+    private final FluentWait<WebDriver> wait;
+    private final FluentWait<WebDriver> waitP;
+    private final FluentWait<WebDriver> waitL;
+    private final FluentWait<WebDriver> waitMensaje;
 
     //Menu Administrar Perfiles
     private By linkAdmPerfiles = By.linkText("Administrar Perfiles");
@@ -29,7 +29,7 @@ public class administrar_Perfiles extends basePage {
     private By btnAsignarFiltro1 = By.xpath("//input[contains(@class, 'iceCmdBtn')and contains(@src,'/Portal/imgs/btnAsignarFiltro.gif')]");
       private By btnAsignarFiltro2 = By.xpath("//input[contains(@class, 'iceCmdBtn')and contains(@src,'/Portal/imgs/btnAsignarFiltro.gif')]");
       private By btnAcepAsigFilt2= By.xpath("//input[contains(@class, 'iceCmdBtn')and contains(@src,'/Portal/imgs/btnAceptar.gif')]");
-      private By msjConfAsigF2= By.id("j_id112:mens");
+      private By msjConfAsigF2= By.id("//*[contains(text(), 'La asignación')]");
 
 
     //Administrar Perfiles --Cambiar Estado
@@ -46,10 +46,25 @@ public class administrar_Perfiles extends basePage {
     public administrar_Perfiles(WebDriver webDriver)
     {
         super(webDriver);
-        this.wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        this.waitMensaje = new WebDriverWait(webDriver, Duration.ofSeconds(30));
-        this.waitP = new WebDriverWait(webDriver, Duration.ofSeconds(35));
-        this.waitL = new WebDriverWait(webDriver, Duration.ofSeconds(20));
+        this.wait = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
+
+        this.waitP = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(20))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
+
+        this.waitL = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(35))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
+
+        this.waitMensaje = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(35))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
     }
 
     public void ingresoAdministrarPerfiles()
@@ -137,6 +152,7 @@ public class administrar_Perfiles extends basePage {
 
         WebElement btnAsiFiltro1 = waitL.until(ExpectedConditions.elementToBeClickable(btnAsignarFiltro1));
         btnAsiFiltro1.click();
+
     }
         public void escogeFiltro(String Filtro ,String Descripcion){
 
@@ -146,7 +162,7 @@ public class administrar_Perfiles extends basePage {
             Map<String, String> criterios = new HashMap<>();
             criterios.put("j_id141",Filtro );
             criterios.put("j_id144", Descripcion);
-
+            waitP.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
             seleccionarRegistroPorDatos(tablaLocator, criterios);
 
         waitP.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
@@ -154,7 +170,7 @@ public class administrar_Perfiles extends basePage {
         WebElement btnAsiFiltro2 = waitP.until(ExpectedConditions.elementToBeClickable(btnAsignarFiltro2));
         btnAsiFiltro2.click();
 
-        WebElement btnAcepFiltro2 =  waitL.until(ExpectedConditions.elementToBeClickable(btnAcepAsigFilt2));
+        WebElement btnAcepFiltro2 =  waitP.until(ExpectedConditions.elementToBeClickable(btnAcepAsigFilt2));
         btnAcepFiltro2.click();
 
     }

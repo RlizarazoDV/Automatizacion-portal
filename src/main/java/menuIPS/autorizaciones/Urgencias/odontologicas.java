@@ -15,7 +15,7 @@ public class odontologicas extends basePage
     private final FluentWait<WebDriver> waitL;
 
 
-    private final By linkUrgencias = By.xpath("//*[@id=\"option101\"]/table/tbody/tr[3]/td[2]/div/p");
+    private final By linkUrgencias = By.xpath("//*[contains(text(),'Urgencias')]");
     private final By  linkOdontologicas= By.linkText("Odontológicas");
     private final By tipoId = By.id("autorizarUrgenciasForm1:tipoIdCmb");
     private final By Id =By.id("autorizarUrgenciasForm1:idTxt");

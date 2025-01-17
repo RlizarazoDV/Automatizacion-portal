@@ -11,12 +11,15 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-public class descargar_Formulario extends basePage  {
+public class descargar_Formulario extends basePage
+{
+
     private final FluentWait<WebDriver> wait;
     private final FluentWait<WebDriver> waitP;
     private final FluentWait<WebDriver> waitL;
     private final FluentWait<WebDriver> waitMensaje;
-    private final By tabServicios = By.xpath("//img[contains(@class, 'iceGphImg tabServicios') and contains(@src, '/Portal/imgs/tab_servicios_1.jpg?v=1724853903068')]");
+
+    private final By tabServicios = By.xpath("//img[contains(@class, 'iceGphImg tabServicios')and contains(@src, '/Portal/imgs/tab_servicios_1')]");
     private final By linkEmpleador = By.linkText("Empleador");
     private final By opcionMovilidadAlSubsidiado = By.xpath("//div[contains(@class, 'handPointer')and contains(text(), 'Movilidad a Subsidiado')]");
     private final By linkDescargarFormulario = By.linkText("Descargar Formulario");
@@ -61,21 +64,29 @@ public class descargar_Formulario extends basePage  {
         WebElement linkEmpElement = wait.until(ExpectedConditions.elementToBeClickable(linkEmpleador));
         linkEmpElement.click();
 
-        WebElement opcionMovElement = wait.until(ExpectedConditions.elementToBeClickable(opcionMovilidadAlSubsidiado));
-        opcionMovElement.click();
+
     }
     public void Descargar_Formulario(){
+        WebElement opcionMovElement = wait.until(ExpectedConditions.elementToBeClickable(opcionMovilidadAlSubsidiado));
+        opcionMovElement.click();
         WebElement opcionDescFormulario = wait.until(ExpectedConditions.elementToBeClickable(linkDescargarFormulario));
         opcionDescFormulario.click();
     }
 
-    public void  error()
+    public boolean error()
     {
-        WebElement iframe = waitP.until(ExpectedConditions.visibilityOfElementLocated(iFrame));
-        webDriver.switchTo().frame(iframe);
-        WebElement mensajeError = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("sub-frame-error")));
-        Actions actions = new Actions(webDriver);
-        actions.moveToElement(mensajeError).perform();
+        try {
+            WebElement iframe = waitMensaje.until(ExpectedConditions.presenceOfElementLocated(iFrame));
+            webDriver.switchTo().frame(iframe);
+
+            WebElement mensajeError = waitMensaje.until(ExpectedConditions.presenceOfElementLocated(By.id("sub-frame-error")));
+            return mensajeError.isDisplayed();
+        } catch (TimeoutException | NoSuchElementException e) {
+
+            return false;
+
+        }
+    }
 
     }
 
@@ -85,4 +96,4 @@ public class descargar_Formulario extends basePage  {
 
 
 
-}
+

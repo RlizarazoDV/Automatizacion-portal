@@ -15,7 +15,7 @@ public class validacion_De_Derechos extends basePage {
 
     private final FluentWait<WebDriver> waitL;
 
-    private final By linkAutorizaciones = By.xpath("//*[@id=\"j_id79\"]/table/tbody/tr[1]/td/div");
+    private final By linkAutorizaciones = By.xpath("//*[contains(text(),'Autorizaciones')]");
     private final By linkValidacionDeDerechos = By.linkText("Validación de Derechos (Estado Afiliación)");
     private final By linkValidacionEstadoAfiliacionT = By.xpath("//*[@id=\"ConsultarEstadoAfiliacionFORM:tipoIdCmb\"]");
     private final By linkValidacionEstadoAfiliacionI = By.xpath("//*[@id=\"ConsultarEstadoAfiliacionFORM:idTxt\"]");
@@ -70,69 +70,63 @@ public class validacion_De_Derechos extends basePage {
 
 
     }
-    public void selectByVisibleTextWithRetry(By selectLocator, String visibleText)
-    {
+    public void selectByVisibleTextWithRetry(By selectLocator, String visibleText) {
         int attempts = 0;
         boolean success = false;
 
-        while (attempts < 3 && !success)
-        {
+        while (attempts < 3 && !success) {
             try {
                 WebElement selectElement = waitL.until(ExpectedConditions.elementToBeClickable(selectLocator));
                 Select select = new Select(selectElement);
 
                 boolean optionExists = select.getOptions().stream()
                         .anyMatch(option -> option.getText().equals(visibleText));
-                if (optionExists)
-                {
+                if (optionExists) {
                     select.selectByVisibleText(visibleText);
                     success = true;
-                } else
-
-                {
+                } else {
                     throw new NoSuchElementException("Option not found: " + visibleText);
                 }
             } catch (StaleElementReferenceException | NoSuchElementException e) {
                 attempts++;
-                try
-                {
+                try {
                     Thread.sleep(3000); // Espera 3 segundos antes de intentar de nuevo
                 } catch (InterruptedException ie) {
                     Thread.currentThread().interrupt();
+
                 }
             }
-        }
 
-        if (!success)
+            if (!success) {
+                throw new NoSuchElementException("Could not locate option with text: " + visibleText + " after multiple attempts");
+            }
+        }
+    }
+
+        private void waitForPageLoad () {
+            new WebDriverWait(webDriver, Duration.ofSeconds(30)).until(
+                    webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+        }
+        private void switchToIframeById (String iframeId)
         {
-            throw new NoSuchElementException("Could not locate option with text: " + visibleText + " after multiple attempts");
+            wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id(iframeId)));
         }
-    }
 
-    private void waitForPageLoad()
-    {
-        new WebDriverWait(webDriver, Duration.ofSeconds(30)).until(
-                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
-    }
-    private void switchToIframeById(String iframeId)
-    {
-        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.id(iframeId)));
-    }
+        public String comparaExitoso ()
+        {
+            WebElement mensajeexito = wait.until(ExpectedConditions.visibilityOfElementLocated(mensaje));
+            String mensajeEx = mensajeexito.getText();
 
-    public String comparaExitoso()
-    {
-        WebElement mensajeexito = wait.until(ExpectedConditions.visibilityOfElementLocated(mensaje));
-        String mensajeEx = mensajeexito.getText();
+            return mensajeEx;
+        }
 
-        return  mensajeEx;
-    }
+        public String compara ()
+        {
+            WebElement mensajeError = wait.until(ExpectedConditions.visibilityOfElementLocated(errormensaje));
+            String mensaje = mensajeError.getText();
 
-    public String compara()
-    {
-        WebElement mensajeError = wait.until(ExpectedConditions.visibilityOfElementLocated(errormensaje));
-        String mensaje = mensajeError.getText();
-
-        return mensaje;
-    }
+            return mensaje;
+        }
 
 }
+

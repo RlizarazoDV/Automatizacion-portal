@@ -12,7 +12,8 @@ public class consulta_direccionamiento extends basePage {
     private final FluentWait<WebDriver> wait;
 
     private final FluentWait<WebDriver> waitL;
-    private final By linkAutorizaciones = By.xpath("//*[@id=\"j_id79\"]/table/tbody/tr[1]/td/div");
+    private final By linkAutorizaciones = By.xpath("//*[contains(@id,'ifAuto')]");
+
     private final By linkConsultaDireccionamiento= By.linkText("Legalización Direccionamiento");
     private final By linkConsultaDi = By.id("j_id35:PreAutorizacionTxt");
     private final By verificarC= By.id("j_id35:cmdverificar");

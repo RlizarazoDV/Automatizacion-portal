@@ -1,9 +1,8 @@
 package menuAdministrador.informe_Usuario;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import Configuracion.basePage;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,27 +11,31 @@ import java.util.Set;
 
 public class log_Actividad extends basePage{
 
-    private final WebDriverWait wait;
+    private final FluentWait<WebDriver> wait;
+    private final FluentWait<WebDriver> waitP;
+    private final FluentWait<WebDriver> waitL;
+
+
     private final By linkLogActividad = By.linkText("Log Actividad");
-    private final By tipoIdentificacion = By.id("logForm:tid");
-    private final By id = By.id("logForm:id2");
-    private final By tipoNovedad = By.id("logForm:logActivityType");
+    private final  By tipoIdentificacion =  By.xpath("//*[contains(text(),'Usuario:')]//following::select[1]");
+    private final By identificacion = By.xpath("//*[contains(text(),'Usuario:')]//following::input[1]");
+    private final By tipoNovedad = By.xpath("//*[contains(text(),'Tipo Novedad:')]//following::select[1]");
+
     // fecha inicio
-    private final By botonCalendarioI = By.id("logForm:dateFrom_calendarButton");
-    private final By Calendarpopup= By.id("logForm:dateFrom_calendarPopup");
-    private final By Calendarmes= By.id("logForm:dateFrom_selMo");
-    private final By Calendaraño= By.id("logForm:dateFrom_selYr");
-    private By specificDateLocator;
+    private final By fechaini=  By.xpath("//*[contains(text(),'Fecha Inicial')]//following::input[2]");
+    private final By mes=  By.xpath("//*[contains(text(),'Fecha Inicial')]//following::select[1]");
+    private final By año=  By.xpath("//*[contains(text(),'Fecha Inicial')]//following::select[2]");
+
+
     // fecha fin
-    private final By botonCalendarioF = By.id("logForm:dateTo_calendarButton");
-    private final By CalendarpopupF= By.id("logForm:dateTo_calendarPopup");
-    private final By CalendarmesF= By.id("logForm:dateTo_selMo");
-    private final By CalendarañoF= By.id("logForm:dateTo_selYr");
-    private By specificDateLocatorF;
+    private final By fechafin=  By.xpath("//*[contains(text(),'Fecha Final')]//following::input[2]");
+    private final By mesfin=  By.xpath("//*[contains(text(),'Fecha Final')]//following::select[1]");
+    private final By añofin=  By.xpath("//*[contains(text(),'Fecha Final')]//following::select[2]");
 
-    private final By botonIngresar = By.id("logForm:searchButton");
 
-    private final By imprimirbutton = By.xpath("//a[@href='/Portal/downloadservlet']");
+    private final By botonAceptar = By.xpath("//input[contains(@class,'iceCmdBtn')and contains(@src, '/Portal/imgs/btnAceptar.gif')]");
+
+    private final By imprimirbutton = By.xpath("//a[contains(@href,'/Portal/downloadservlet')]");
 
 
 
@@ -40,7 +43,22 @@ public class log_Actividad extends basePage{
     public log_Actividad(WebDriver webDriver )
     {
         super(webDriver);
-        this.wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        this.wait = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
+
+        this.waitP = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(20))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
+
+        this.waitL = new FluentWait<>(webDriver)
+                .withTimeout(Duration.ofSeconds(35))
+                .pollingEvery(Duration.ofSeconds(1))
+                .ignoring(java.util.NoSuchElementException.class);
+
+
 
     }
 
@@ -58,73 +76,79 @@ public class log_Actividad extends basePage{
         Select tipoIdentificacionDropdown = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(tipoIdentificacion)));
         tipoIdentificacionDropdown.selectByVisibleText(tipoIde);
 
-        WebElement campoIdentificacionElement = webDriver.findElement(id);
-        campoIdentificacionElement.sendKeys(numIde);
+        waitP.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
+
+        selectByVisibleTextWithRetry(identificacion,numIde);
+
+        waitP.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
 
         Select tipoNove= new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(tipoNovedad)));
         tipoNove.selectByVisibleText(tipoNov);
 
     }
-    public void fechaInicio(String mes,String año,String dia)
-    {
+    public void fechaInicio(String Dia,String Mes,String Año){
+        int attempts = 0;
+        boolean success = false;
 
-        WebElement calendarBtn = wait.until(ExpectedConditions.elementToBeClickable(botonCalendarioI));
-        calendarBtn.click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(Calendarpopup));
-
-
-        WebElement calendarmes = wait.until(ExpectedConditions.elementToBeClickable(Calendarmes));
-        calendarmes.click();
-
-        WebElement monthOption = webDriver.findElement(By.xpath("//option[text()='" + mes + "']"));
-        monthOption.click();
+        WebElement linkfechaIni = waitP.until(ExpectedConditions.elementToBeClickable(fechaini));
+        linkfechaIni.click();
+        Select linkaño = new Select(waitP.until(ExpectedConditions.elementToBeClickable(año)));
+        linkaño.selectByVisibleText(Año);
 
 
-        WebElement calendarAño = wait.until(ExpectedConditions.elementToBeClickable(Calendaraño));
-        calendarAño.click();
+        while (attempts < 3 && !success)
+        {
+            try {
+                Select linkmes = new Select(waitP.until(ExpectedConditions.elementToBeClickable(mes)));
+                linkmes.selectByVisibleText(Mes);
+                WebElement linkdia = waitP.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(@class,'iceOutTxt') and contains(text(),'" + Dia + "')]")));
+                linkdia.click();
+                success = true;
 
-        WebElement yearOption = webDriver.findElement(By.xpath("//option[text()='" + año + "']"));
-        yearOption.click();
-
-        specificDateLocator = By.xpath("//a[text()='" + dia + "']");
-        WebElement dateToSelect = wait.until(ExpectedConditions.elementToBeClickable(specificDateLocator));
-        dateToSelect.click();
+            } catch (org.openqa.selenium.StaleElementReferenceException e)
+            {
+                System.out.println("Elemento obsoleto, reintentando... (" + attempts + ")");
+                attempts++;
+            }
+        }
+        if (!success)
+        {
+            throw new RuntimeException("No se pudo seleccionar la fecha inicial después de 3 intentos.");
+        }
 
     }
 
-    public void fechafin(String mesF,String añoF,String diaF)
-    {
+    public void fechaFin(String Diafin,String Mesfin,String Añofin) {
+        boolean success = false;
+        int attempts = 0;
+        waitP.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
+        WebElement linkfechafin = wait.until(ExpectedConditions.elementToBeClickable(fechafin));
+        linkfechafin.click();
+        Select linkañofin = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(añofin)));
+        linkañofin.selectByVisibleText(Añofin);
+        waitP.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete';"));
+        while (attempts < 3 && !success) {
+            try {
+                Select linkmesfin = new Select(waitP.until(ExpectedConditions.visibilityOfElementLocated(mesfin)));
+                linkmesfin.selectByVisibleText(Mesfin);
+                WebElement linkdiafin = waitL.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(@class,'iceOutTxt') and contains(text(),'" + Diafin + "')]")));
+                linkdiafin.click();
+                success = true;
 
-        WebElement calendarBtnF = wait.until(ExpectedConditions.elementToBeClickable(botonCalendarioF));
-        calendarBtnF.click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(CalendarpopupF));
-
-
-        WebElement calendarmes = wait.until(ExpectedConditions.elementToBeClickable(CalendarmesF));
-        calendarmes.click();
-
-        WebElement monthOption = webDriver.findElement(By.xpath("//option[text()='" + mesF + "']"));
-        monthOption.click();
-
-
-        WebElement calendarAño = wait.until(ExpectedConditions.elementToBeClickable(CalendarañoF));
-        calendarAño.click();
-
-        WebElement yearOption = webDriver.findElement(By.xpath("//option[text()='" + añoF + "']"));
-        yearOption.click();
-
-        specificDateLocatorF = By.xpath("//a[text()='" + diaF + "']");
-        WebElement dateToSelect = wait.until(ExpectedConditions.elementToBeClickable(specificDateLocatorF));
-        dateToSelect.click();
-
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {
+                System.out.println("Elemento obsoleto, reintentando... (" + attempts + ")");
+                attempts++;
+            }
+            if (!success) {
+                throw new RuntimeException("No se pudo seleccionar la fecha inicial después de 3 intentos.");
+            }
+        }
     }
 
     public void botonIngresar()
     {
 
-        WebElement BotonIng = wait.until(ExpectedConditions.elementToBeClickable(botonIngresar));
+        WebElement BotonIng = wait.until(ExpectedConditions.elementToBeClickable(botonAceptar));
         BotonIng.click();
 
     }
@@ -134,29 +158,78 @@ public class log_Actividad extends basePage{
     {
 
         String mainTab = webDriver.getWindowHandle();
-        WebElement botonImprimir = wait.until(ExpectedConditions.elementToBeClickable(imprimirbutton));
+
+        WebElement botonImprimir = waitL.until(ExpectedConditions.elementToBeClickable(imprimirbutton));
         botonImprimir.click();
-        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 
-        Set<String> idVentanas = webDriver.getWindowHandles();
+        Set<String> allWindows = webDriver.getWindowHandles();
 
-        for (String ventanaActual : idVentanas) {
-            if (!ventanaActual.equalsIgnoreCase(mainTab))
-            {
+        // Cambia a la nueva ventana o pestaña
+        for (String window : allWindows) {
+            if (!window.equals(mainTab)) {
+                webDriver.switchTo().window(window);
+                System.out.println("urlimpresion");
 
-                webDriver.switchTo().window(ventanaActual);
-                wait.until(ExpectedConditions.urlContains("/Portal/downloadservlet"));
-                WebElement pageTitle = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Log de Actividad')]")));
-
-                if (pageTitle.isDisplayed())
-                {
-                    System.out.println("La página se ha abierto correctamente.");
-                } else
-                {
-                    System.out.println("La página no se ha abierto correctamente.");
-                }
-
+                break;
             }
         }
+        System.out.println("Nueva URL: " + webDriver.getCurrentUrl());
     }
+
+
+    private void selectByVisibleTextWithRetry(By selectLocator, String visibleText)
+    {
+        int attempts = 0;
+        boolean success = false;
+
+        while (attempts < 3 && !success) {
+            try {
+                // Localiza el elemento
+                WebElement identificacionU = waitP.until(ExpectedConditions.presenceOfElementLocated(selectLocator));
+                String disabledAttribute = identificacionU.getAttribute("disabled");
+
+                if (disabledAttribute != null) {
+                    System.out.println("El campo está deshabilitado. Intentando habilitarlo...");
+
+                    // Habilitar el campo utilizando JavaScript
+                    ((JavascriptExecutor) webDriver).executeScript("arguments[0].removeAttribute('disabled');", identificacionU);
+
+                    // Revalidar si el campo ahora está habilitado
+                    identificacionU = waitP.until(ExpectedConditions.elementToBeClickable(selectLocator));
+                    disabledAttribute = identificacionU.getAttribute("disabled");
+
+                    // Si el campo sigue deshabilitado, lanzar excepción para intentar de nuevo
+                    if (disabledAttribute != null) {
+                        throw new org.openqa.selenium.NoSuchElementException("Campo sigue deshabilitado después de intentar habilitarlo.");
+                    }
+                }
+
+                // Si el campo está habilitado, proceder a enviar el texto
+                System.out.println("El campo está habilitado. Enviando texto...");
+                identificacionU = waitP.until(ExpectedConditions.elementToBeClickable(selectLocator));
+                identificacionU.sendKeys(visibleText);
+                success = true; // Si todo salió bien, marcar como exitoso
+
+            } catch (StaleElementReferenceException | org.openqa.selenium.NoSuchElementException e) {
+                attempts++;
+                System.out.println("Intento fallido, reintentando... (" + attempts + "/3)");
+
+                try {
+                    Thread.sleep(2000); // Esperar 2 segundos antes de intentar de nuevo
+                } catch (InterruptedException ie) {
+                    Thread.currentThread().interrupt(); // Restablecer el estado de interrupción
+                }
+            }
+        }
+
+        if (!success) {
+            throw new org.openqa.selenium.NoSuchElementException("No se pudo habilitar el campo o localizar la opción con texto: " + visibleText + " después de múltiples intentos.");
+        }
+    }
+
+
+
+
+
+
 }

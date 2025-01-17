@@ -1,64 +1,272 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" thread-count="1" data-provider-thread-count="1" parallel="methods" >
-    <test name="Portal Famisanar WEB - Login">
-        <parameter name="browser" value="chrome"/>
-        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx" />
-        <parameter name="nombreHoja" value="Login" />
-        <classes>
-            <!--class name="loginTest.loginTest"/-->
-        </classes>
-    </test>
-    <test name="Portal Famisanar WEB - Menu Administrador">
-        <parameter name="browser" value="chrome"/>
-        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx" />
-        <parameter name="nombreHoja" value="menuUsuarios" />
-        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
 
+    <!--MENU ADMINISTRADOR/-->
+
+    <test name="Usuario">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx" />
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <parameter name="nombreHoja" value="menuUsuarios"/>
         <classes>
             <class name="menuAdministradorTest.usuarioTest.usuarioTest"/>
-              <!--class name="menuAdministradorTest.informe_UsuarioTest.informeTest"/-->
+
+        </classes>
+    </test>
+
+    <test name="Informe Usuario">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx" />
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <parameter name="nombreHoja" value="menuInformes"/>
+        <classes>
+            <!--class name="menuAdministradorTest.informe_UsuarioTest.informe_UsuarioTest"-->
+
+        </classes>
+    </test>
+
+    <test name="Aplicaciones">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAdministrador/datosMenuAdministrador.xlsx" />
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <parameter name="nombreHoja" value="AdministrarAplicaciones"/>
+        <classes>
             <!--class name = "menuAdministradorTest.aplicacionesTest.aplicacionesTest"/-->
         </classes>
     </test>
-    <test name="Portal Famisanar WEB - Menu IPS">
+
+    <!--MENU IPS-->
+
+    <test name="Ingreso IPS">
         <parameter name="browser" value="chrome"/>
-        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx" />
-        <parameter name="nombreHoja" value="menuAutorizaciones" />
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
         <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
         <classes>
             <!--class name="IPSTest.ingresoIPSTest.ingresoIPSTest"/-->
-            <!--class name = "IPSTest.autorizacionesTest.autorizacionesTest"/-->
-            <!--class name = "com.famisanar.b_ips.c_menuCarteraTest"/-->
-            <!--class name = "com.famisanar.b_ips.d_SubmenuBasesDeDatos"/-->
-            <!--class name="com.famisanar.b_ips.h_SubmenuServiciosAlCliente"/-->
         </classes>
     </test>
-    <test name="Portal Famisanar WEB - Menu Empleador">
+
+    <test name="Autorizaciones">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.autorizacionesTest.autorizacionesTest"/-->
+        </classes>
+    </test>
+
+    <test name="Datos Del Empleador">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.datosDelEmpleadorTest.datosDelEmpleadorTest"/-->
+        </classes>
+    </test>
+
+    <test name="Afiliaciones">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.afiliacionesTest.afiliacionesTest"/-->
+        </classes>
+    </test>
+
+    <test name="Cartera">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.carteraTest.carteraTest"/-->
+        </classes>
+    </test>
+
+    <test name="Licencias E Incapacidades">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.licenciasEIncapacidadesTest.licenciasEIncapacidadesTest"/-->
+        </classes>
+    </test>
+
+    <test name="Bases de Datos - Descargar Actualización">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.basesDeDatosTest.descargarActualizacionTest"/-->
+        </classes>
+    </test>
+
+    <test name="consulta prescripciones">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.consultaPrescripcionesTest.consultaPrescripcionesTest"/-->
+        </classes>
+    </test>
+
+    <test name="Radicacion Digital">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.radicacionDigitalTest.radicacionDigitalTest"/-->
+        </classes>
+    </test>
+
+    <test name="Facturación Digital ">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuIPS/datosMenuIPS.xlsx"/>
+        <parameter name="nombreHoja" value="menuAutorizaciones"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="IPSTest.FacturacionDigitalTest.FacturacionDigitalTest"/-->
+        </classes>
+    </test>
+
+
+    <!-- MENU EMPLEADOR -->
+
+    <test name="Movilidad a Subsidiado">
         <parameter name="browser" value="chrome"/>
         <parameter name="rutaArchivo" value="src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx"/>
         <parameter name="nombreHoja" value="menusEmpleador"/>
         <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
         <classes>
-            <class name="menuEmpleadorTest.movilidadASubsidiadoTest.descargarFormularioTest"/>
-            <class name="menuEmpleadorTest.datosEmpleadorTest.ActualizarInformacionEmpleadorTest"/>
-            <!--class name="com.famisanar.c_empleador.d_opcionAportesyCarteraTest"/-->
-            <!--class name = "com.famisanar.c_empleador.e_licenciaEIncapacidadesTest"/-->
-            <!--class name = "com.famisanar.c_empleador.g_servicioAlClienteTest"/-->
+            <!--class name="menuEmpleadorTest.movilidadASubsidiadoTest.descargarFormularioTest"/-->
         </classes>
     </test>
-    <test name="Portal Famisanar WEB - Menu Afiliado POS">
-        <parameter name="browser" value="firefox"/>
-        <parameter name="seleniumURL" value=""/>
+
+    <test name="Actualizar Información de Empleador">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx"/>
+        <parameter name="nombreHoja" value="menusEmpleador"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
         <classes>
-            <!--class name = "com.famisanar.d_afiliadoPOS.b_actualizacionDatosContactoTest"/-->
-            <!--class name="com.famisanar.d_afiliadoPOS.f_aportesYCarteraTest"/-->
-            <!--class name="com.famisanar.d_afiliadoPOS.g_saludTest"/-->
-            <!--class name="com.famisanar.d_afiliadoPOS.h_certificacionesTest"/-->
-            <!--class name="com.famisanar.d_afiliadoPOS.i_servicioAlClienteTest"/-->
-            <!--class name="com.famisanar.d_afiliadoPOS.j_citasMedicasPosTest"/-->
+            <!--class name="menuEmpleadorTest.datosEmpleadorTest.ActualizarInformacionEmpleadorTest"/-->
         </classes>
     </test>
+
+    <test name="Afiliaciones_empleador">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx"/>
+        <parameter name="nombreHoja" value="menusEmpleador"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="menuEmpleadorTest.afiliacionesTest.afiliacionesTest"/-->
+        </classes>
+    </test>
+
+    <test name="Opción Aportes y Cartera">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx"/>
+        <parameter name="nombreHoja" value="menusEmpleador"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="menuEmpleadorTest.AportesYCarteraTest.POSTest"/-->
+            <!--class name="menuEmpleadorTest.AportesYCarteraTest.UPCTest"/-->
+            <!--class name="menuEmpleadorTest.AportesYCarteraTest.PACTest"/-->
+        </classes>
+    </test>
+
+    <test name="Licencia e Incapacidades">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuEmpleador/datosMenuEmpleador.xlsx"/>
+        <parameter name="nombreHoja" value="menusEmpleador"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="com.famisanar.c_empleador.e_licenciaEIncapacidadesTest"/-->
+        </classes>
+    </test>
+
+
+
+    <!-- MENU AFILIADO POS -->
+    <test name="Movilidad a Subsidiado - afiliado pos">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="rutaArchivo" value="src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx"/>
+    <parameter name="nombreHoja" value="menusAfiliadoPos"/>
+    <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="menuAfiliadoPosTest.movilidadASubsidiado.descargaFormularioMoviliadadTest"/-->
+        </classes>
+    </test>
+    <test name="Datos del Empleador">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx"/>
+        <parameter name="nombreHoja" value="menusAfiliadoPos"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="menuAfiliadoPosTest.Datos_EmpleadorTest.Datos_EmpleadorTest"/-->
+        </classes>
+    </test>
+    <test name="Actualizacion Datos de Contacto">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx"/>
+        <parameter name="nombreHoja" value="menusAfiliadoPos"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="menuAfiliadoPosTest.Actualizacion_Datos_ContactoTest.Actualizacion_Datos_ContactoTest"/-->
+
+        </classes>
+    </test>
+    <test name="Afiliado POS - Autorizaciones">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx"/>
+        <parameter name="nombreHoja" value="menusAfiliadoPos"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="menuAfiliadoPosTest.AutorizacionesTest.AutorizacionesTest"/-->
+
+        </classes>
+    </test>
+    <test name="Afiliado POS - Portabilidad">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx"/>
+        <parameter name="nombreHoja" value="menusAfiliadoPos"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="menuAfiliadoPosTest.PortabilidadTest.PortabilidadTest"/-->
+
+        </classes>
+    </test>
+    <test name="Afiliado POS - Aportes y Cartera">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="rutaArchivo" value="src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx"/>
+        <parameter name="nombreHoja" value="menusAfiliadoPos"/>
+        <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+        <classes>
+            <!--class name="menuAfiliadoPosTest.Aportes_Y_CarteraTest.PosTest"/-->
+            <!--class name="menuAfiliadoPosTest.Aportes_Y_CarteraTest.UPCAdicionalTest"/-->
+            <!--class name="menuAfiliadoPosTest.Aportes_Y_CarteraTest.PACTest"/-->
+
+        </classes>
+    </test>
+    <test name="Afiliado POS - Certificaciones">
+    <parameter name="browser" value="chrome"/>
+    <parameter name="rutaArchivo" value="src/test/resources/excel/menuAfiliadoPOS/datosMenuAfiliadoPOS.xlsx"/>
+    <parameter name="nombreHoja" value="menusAfiliadoPos"/>
+    <parameter name="downloadFilepath" value="src/test/resources/downloads"/>
+    <classes>
+        <!--class name="menuAfiliadoPosTest.CertificacionesTest.CertificacionesTest"/-->
+    </classes>
+    </test>
+
+
 
     <test name="Portal Famisanar WEB - Menu Contratante PAC">
         <parameter name="browser" value="chrome"/>
@@ -68,10 +276,10 @@
 
 
         <classes>
-            <class name="menuContratantePacTest.actualizarDatosContactoTest.actualizardatosContacto"/>
-            <class name="menuContratantePacTest.afiliacionesTest.afiliadoTest"/>
-            <class name="menuContratantePacTest.facturasYPagosTest.facturasYPagosTest"/>
-            <class name="menuContratantePacTest.certificacionesTest.certificacionesTest"/>
+            <!--class name="menuContratantePacTest.actualizarDatosContactoTest.actualizardatosContacto"/-->
+            <!--class name="menuContratantePacTest.afiliacionesTest.afiliadoTest"/-->
+            <!--class name="menuContratantePacTest.facturasYPagosTest.facturasYPagosTest"/-->
+            <!--class name="menuContratantePacTest.certificacionesTest.certificacionesTest"/-->
 
         </classes>
     </test>

@@ -19,10 +19,10 @@ public class administrar_Solicitudes extends basePage
     private final By linkAdministrarSolicitudes = By.linkText("Administrar Solicitudes");
 
     //Formulario Administrar usuario
-    private final  By tipoIdentificacion =  By.id("SearchPetitionsForm:tipoIdentificacion");
-    private final By identificacion = By.id("SearchPetitionsForm:identificacion");
-    private final By estadoSolicitud = By.id("SearchPetitionsForm:petitionStatus");
-    private final By botonAceptar = By.id("SearchPetitionsForm:searchButton");
+    private final  By tipoIdentificacion =  By.xpath("//*[contains(text(),'Usuario:')]//following::select[1]");
+    private final By identificacion = By.xpath("//*[contains(text(),'Usuario:')]//following::input[1]");
+    private final By estadoSolicitud = By.xpath("//*[contains(text(),'Estado Solicitud:')]//following::select[1]");
+    private final By botonAceptar = By.xpath("//input[contains(@class,'iceCmdBtn')and contains(@src, '/Portal/imgs/btnAceptar.gif')]");
     private final By linkRespuesta = By.xpath("//span[contains(., 'No hay resultados para mostrar')]");
     private final By tabla = By.xpath("//label[contains(@class,'iceOutLbl') and contains(text(),'Fecha Revisión') ]");
 
@@ -136,6 +136,8 @@ public class administrar_Solicitudes extends basePage
         }
 
     }
+
+
 
 
     public String compararRespuesta()
