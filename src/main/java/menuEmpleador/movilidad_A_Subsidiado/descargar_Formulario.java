@@ -75,20 +75,16 @@ public class descargar_Formulario extends basePage
 
     public boolean error()
     {
-        try {
+
             WebElement iframe = waitMensaje.until(ExpectedConditions.presenceOfElementLocated(iFrame));
             webDriver.switchTo().frame(iframe);
 
-            WebElement mensajeError = waitMensaje.until(ExpectedConditions.presenceOfElementLocated(By.id("sub-frame-error")));
-            return mensajeError.isDisplayed();
-        } catch (TimeoutException | NoSuchElementException e) {
-
-            return false;
-
-        }
-    }
+        WebElement mensajeError = waitMensaje.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(text(),'404 - Not Found')]")));
+        return mensajeError.isDisplayed();
 
     }
+
+}
 
 
 
